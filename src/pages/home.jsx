@@ -14,7 +14,7 @@ const Home = () => {
     <>
       <div className="homePageWrapper">
         
-        <div className="formWrapper">
+        <div className="formWrapper bg-[#242f42] text-[#fff]">
           <img
             className="HomePageLogo"
             src="logo192.png"
