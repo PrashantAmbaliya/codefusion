@@ -43,7 +43,7 @@ const Home = () => {
           </h4>
           <div className="inputGroup flex flex-col gap-3">
             <input
-              className="h-8 rounded-[5px] pl-[10px] bg-[#eee]"
+              className="h-8 rounded-[5px] pl-[10px] bg-[#eee] text-black"
               onChange={(e) => {
                 setRoomID(e.target.value);
               }}
@@ -52,7 +52,7 @@ const Home = () => {
               placeholder="ROOM ID"
             />
             <input
-              className="h-8 rounded-[5px] pl-[10px] bg-[#eee]"
+              className="h-8 rounded-[5px] pl-[10px] bg-[#eee] text-black"
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
