@@ -9,8 +9,19 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { atomone } from '@uiw/codemirror-theme-atomone';
+import React, { useEffect } from 'react';
+import ACTIONS from '../Actions';
 
-const Editor = () => {
+const Editor = ({value,socketRef, roomID}) => {
+
+
+    const onChange = React.useCallback((value, viewUpdate) => {
+        socketRef.current.emit(ACTIONS.CODE_CHANGE, {
+            roomID,
+            value,
+        });
+      }, []);
+
 
     // useEffect(() => {
     //     async function init() {
@@ -28,9 +39,9 @@ const Editor = () => {
     // },[])
 
     return (
-            <CodeMirror className='text-[20px]' height="100vh" theme={atomone} extensions={[javascript({ jsx: true })]}/>
-    //    <textarea className="" id="Editor"></textarea>
-    ); 
+        <CodeMirror value={value} className='text-[20px]' height="100vh" theme={atomone} extensions={[javascript({ jsx: true })]} onChange={(e) => onChange(e)} />
+        //    <textarea className="" id="Editor"></textarea>
+    );
 }
 
 export default Editor;

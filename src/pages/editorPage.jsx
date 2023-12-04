@@ -1,15 +1,73 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Client from '../components/clients';
+import { initScoket } from "../socket";
+import ACTIONS from "../Actions";
+import { useLocation, useNavigate, Navigate, useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import Editor from "../components/Editor";
 
 const EditorPage = () => {
-    const [clients, setClients] = useState([
-        { socket: 1, username: "Ram mishraRam mishraRam mishra" },
-        { socket: 2, username: "john doe" },
-        { socket: 3, username: "jsfgdgsgfdgdfgdfgdfg" },
-        { socket: 4, username: "Ram mishra" },
-        { socket: 5, username: "john doe" },
-    ])
+
+    const [clients, setClients] = useState([])
+    const [value, setValue] = useState("console.log('hello world!');");
+    const [code, setCode] = useState([])
+
+    const socketRef = useRef(null);
+    const location = useLocation();
+    const reactNavigator = useNavigate();
+    const { roomID } = useParams();
+
+
+
+    useEffect(() => {
+        const init = async () => {
+            socketRef.current = await initScoket();
+            socketRef.current.on('connect_error', (err) => handedlErro(err))
+            socketRef.current.on('connect_faild', (err) => handedlErro(err))
+
+            function handedlErro(err) {
+                console.log(`socket error: ${err}`);
+                toast.error('Socket Connection Faild Try Again')
+                reactNavigator('/')
+            }
+
+            socketRef.current.emit(ACTIONS.JOIN, {
+                roomID,
+                username: location.state?.username
+            });
+
+            socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketID }) => {
+                if (location.state?.username !== username) {
+                    toast.success(`${username} has Joined`)
+                }
+                setClients(clients);
+            })
+
+            socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketID, username }) => {
+                toast.error(`${username} has Left`)
+                setClients((prev) => {
+                    return prev.filter((client) => client.socketID !== socketID);
+                })
+                console.log(clients);
+            })
+
+            socketRef.current.on(ACTIONS.CODE_CHANGE, ({ roomID, value }) => {
+                if (value !== null) {
+                    setValue(value)
+                }
+            })
+
+
+        }
+        init();
+        return () => {
+            socketRef.current.disconnect();
+        }
+    }, [])
+
+    if (!location.state.username) {
+        return <Navigate to="/" />
+    }
 
     return (
         <>
@@ -26,7 +84,7 @@ const EditorPage = () => {
                         <h3 className="font-bold my-[20px]">Connections</h3>
                         <div className="clientslist flex flex-wrap justify-evenly gap-3">
                             {clients.map((client) => (
-                                <Client key={client.socket} username={client.username} />
+                                <Client key={client.socketID} username={client.username} />
                             ))}
                         </div>
                     </div>
@@ -37,7 +95,7 @@ const EditorPage = () => {
                         Leave
                     </button>
                 </div>
-                <Editor />
+                <Editor value={value} socketRef={socketRef} roomID={roomID} />
             </div>
 
         </>

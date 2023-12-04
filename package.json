@@ -10,17 +10,22 @@
     "@uiw/codemirror-theme-atomone": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "codemirror": "^5.65.2",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server-dev":"nodemon server.js",
+    "server-prod":"node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
