@@ -5,6 +5,7 @@ import ACTIONS from "../Actions";
 import { useLocation, useNavigate, Navigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import Editor from "../components/Editor";
+import clipboardCopy from 'clipboard-copy';
 
 const EditorPage = () => {
 
@@ -16,12 +17,12 @@ const EditorPage = () => {
     const reactNavigator = useNavigate();
     const { roomID } = useParams();
 
-    async function textCopy(){
+    async function textCopy() {
         try {
-            await navigator.clipboard.writeText(roomID)
+            await clipboardCopy(roomID);
             toast.success('You can Share RoomID');
         } catch (error) {
-            toast.success('There is something Wrong');
+            toast.error('There is something Wrong');
             console.log(error);
         }
     }
