@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# CodeFusion - Realtime Collaborative Coding Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CodeFusion is a collaborative coding platform built with React and Socket.io, enabling users to collaboratively code in real-time. Users can join coding rooms, make live code changes, and experience seamless collaboration. This README provides step-by-step explanations for setting up and running the CodeFusion project.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+1. **Clone the repository:**
 
-### `npm start`
+    ```bash
+    git clone https://github.com/your-username/CodeFusion.git
+    ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    This command clones the CodeFusion repository to your local machine.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Navigate to the project directory:**
 
-### `npm test`
+    ```bash
+    cd CodeFusion
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    This command changes your current working directory to the CodeFusion project folder.
 
-### `npm run build`
+3. **Install project dependencies:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    This command installs the required dependencies for the CodeFusion project.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the Backend Server
 
-### `npm run eject`
+To run the Node.js backend server, use the following command:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm run server-dev
+```
+This command starts the backend server, making it ready to handle real-time code collaboration.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Running the Frontend
+To start the React frontend, open a new terminal window and run:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
+This command launches the CodeFusion web application, allowing users to access and collaborate on coding projects in real-time.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Usage
 
-## Learn More
+1. Open your web browser and go to [http://localhost:3000](http://localhost:3000).
+2. Create or join a coding room.
+3. Share the room ID with collaborators.
+4. Start coding in real-time!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Real-time code collaboration
+- Multiple users can join a coding room
+- Seamless updates as users make changes
+- Intuitive user interface for a smooth coding experience
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy coding! 🚀
