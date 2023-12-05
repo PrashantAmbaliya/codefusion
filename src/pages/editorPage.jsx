@@ -9,14 +9,26 @@ import Editor from "../components/Editor";
 const EditorPage = () => {
 
     const [clients, setClients] = useState([])
-    const [value, setValue] = useState("console.log('hello world!');");
-    const [code, setCode] = useState([])
+    const [value, setValue] = useState("");
 
     const socketRef = useRef(null);
     const location = useLocation();
     const reactNavigator = useNavigate();
     const { roomID } = useParams();
 
+    async function textCopy(){
+        try {
+            await navigator.clipboard.writeText(roomID)
+            toast.success('You can Share RoomID');
+        } catch (error) {
+            toast.success('There is something Wrong');
+            console.log(error);
+        }
+    }
+
+    function leaveRoom(){
+        reactNavigator('/')
+    }
 
 
     useEffect(() => {
@@ -41,6 +53,12 @@ const EditorPage = () => {
                     toast.success(`${username} has Joined`)
                 }
                 setClients(clients);
+                if(value){
+                    socketRef.current.emit(ACTIONS.SYNC_CODE, {
+                        socketID,
+                        code : value,
+                    })
+                }
             })
 
             socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketID, username }) => {
@@ -48,15 +66,14 @@ const EditorPage = () => {
                 setClients((prev) => {
                     return prev.filter((client) => client.socketID !== socketID);
                 })
-                console.log(clients);
             })
-
+            
             socketRef.current.on(ACTIONS.CODE_CHANGE, ({ roomID, value }) => {
+                console.log(value);
                 if (value !== null) {
                     setValue(value)
                 }
             })
-
 
         }
         init();
@@ -88,10 +105,10 @@ const EditorPage = () => {
                             ))}
                         </div>
                     </div>
-                    <button className="transition-all text-black ease-in-out duration-300 h-10 bg-[#ffffff] rounded-[5px] font-bold hover:bg-[#8f8f8f] mb-3">
+                    <button onClick={textCopy} className="transition-all text-black ease-in-out duration-300 h-10 bg-[#ffffff] rounded-[5px] font-bold hover:bg-[#8f8f8f] mb-3">
                         Copy RoomID
                     </button>
-                    <button className="transition-all ease-in-out duration-300 h-10 bg-[#61dafb] rounded-[5px] font-bold hover:bg-[#309cb9]">
+                    <button onClick={leaveRoom} className="transition-all ease-in-out duration-300 h-10 bg-[#61dafb] rounded-[5px] font-bold hover:bg-[#309cb9]">
                         Leave
                     </button>
                 </div>

@@ -8,6 +8,8 @@ const port = process.env.PORT || 8000
 const server = createServer(app);
 const io = new Server(server);
 
+app.use(express.static('build'))
+
 const usersSocketMap = {};
 
 function getAllConnectedClients(roomID){
@@ -35,6 +37,13 @@ io.on('connection', (socket) => {
                 username,
                 socketID : socket.id
             })
+        })
+    })
+
+    socket.on(ACTIONS.SYNC_CODE,({socketID,code}) => {
+        console.log("This is ", code);
+        io.to(socketID).emit(ACTIONS.CODE_CHANGE, {
+            value: code,
         })
     })
 

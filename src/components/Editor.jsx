@@ -12,15 +12,14 @@ import { atomone } from '@uiw/codemirror-theme-atomone';
 import React, { useEffect } from 'react';
 import ACTIONS from '../Actions';
 
-const Editor = ({value,socketRef, roomID}) => {
-
+const Editor = ({ value, socketRef, roomID }) => {
 
     const onChange = React.useCallback((value, viewUpdate) => {
         socketRef.current.emit(ACTIONS.CODE_CHANGE, {
             roomID,
             value,
         });
-      }, []);
+    }, []);
 
 
     // useEffect(() => {
@@ -39,7 +38,7 @@ const Editor = ({value,socketRef, roomID}) => {
     // },[])
 
     return (
-        <CodeMirror value={value} className='text-[20px]' height="100vh" theme={atomone} extensions={[javascript({ jsx: true })]} onChange={(e) => onChange(e)} />
+        <CodeMirror value={value} className='text-[20px]' height="100vh" theme={atomone} extensions={[javascript({ jsx: true })]} onChange={onChange} />
         //    <textarea className="" id="Editor"></textarea>
     );
 }
