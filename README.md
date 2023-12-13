@@ -7,7 +7,7 @@ CodeFusion is a collaborative coding platform built with React and Socket.io, en
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/CodeFusion.git
+    git clone https://github.com/PrashantAmbaliya/CodeFusion.git
     ```
 
     This command clones the CodeFusion repository to your local machine.
